@@ -2,7 +2,7 @@ Summary:	Client for PPP+SSL VPN tunnel services
 Summary(pl.UTF-8):	Klient usług tunelowych VPN PPP+SSL
 Name:		openfortivpn
 Version:	1.1.0
-Release:	1
+Release:	2
 License:	GPL v3+ with OpenSSL exception
 Group:		Networking
 Source0:	https://github.com/adrienverge/openfortivpn/archive/v%{version}/%{name}-%{version}.tar.gz
