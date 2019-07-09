@@ -1,12 +1,12 @@
 Summary:	Client for PPP+SSL VPN tunnel services
 Summary(pl.UTF-8):	Klient usług tunelowych VPN PPP+SSL
 Name:		openfortivpn
-Version:	1.1.0
-Release:	2
+Version:	1.10.0
+Release:	1
 License:	GPL v3+ with OpenSSL exception
 Group:		Networking
 Source0:	https://github.com/adrienverge/openfortivpn/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	974e4cd58791bfdbe4ec78cce543c771
+# Source0-md5:	bfbbb82e31acb26cafa6b5aefc453eba
 URL:		https://github.com/adrienverge/openfortivpn
 BuildRequires:	autoconf >= 2.69
 BuildRequires:	automake
@@ -43,6 +43,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+rm -f $RPM_BUILD_ROOT%{_datadir}/openfortivpn/config.template
 
 %clean
 rm -rf $RPM_BUILD_ROOT
