@@ -5,12 +5,15 @@ Version:	1.10.0
 Release:	1
 License:	GPL v3+ with OpenSSL exception
 Group:		Networking
+#Source0Download: https://github.com/adrienverge/openfortivpn/releases
 Source0:	https://github.com/adrienverge/openfortivpn/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	bfbbb82e31acb26cafa6b5aefc453eba
 URL:		https://github.com/adrienverge/openfortivpn
 BuildRequires:	autoconf >= 2.69
 BuildRequires:	automake
-BuildRequires:	openssl-devel
+BuildRequires:	openssl-devel >= 0.9.8
+BuildRequires:	pkgconfig
+BuildRequires:	systemd-devel >= 1:209
 Requires:	ppp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -35,7 +38,9 @@ Jest zgodny z VPN-ami Fortinet.
 %{__autoconf}
 %{__automake}
 %configure \
-	--disable-silent-rules
+	--enable-proc \
+	--disable-silent-rules \
+	--with-pppd=/usr/sbin/pppd
 %{__make}
 
 %install
@@ -44,14 +49,14 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{_datadir}/openfortivpn/config.template
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/openfortivpn/config.template
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.md
+%doc CHANGELOG.md LICENSE.OpenSSL README.md
 %attr(755,root,root) %{_bindir}/openfortivpn
 %dir %{_sysconfdir}/openfortivpn
 %attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/openfortivpn/config
